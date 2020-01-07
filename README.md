@@ -18,3 +18,5 @@ Database on Server
 * nodemon
 * concurrently (run back and frontend at the same time)
 
+### Notes
+* default.json is for config package
