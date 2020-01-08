@@ -6,8 +6,8 @@ const {
   validationResult
 } = require('express-validator');
 const auth = require('../middleware/auth');
-const User = require('../models/User');
 const Contact = require('../models/Contact')
+const User = require('../models/User');
 
 // @route     GET api/contacts
 // @desc      Get all users contacts
@@ -23,15 +23,44 @@ router.get('/', auth, async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error')
   }
-
 });
 
 
 // @route     POST api/contacts
 // @desc      Add new contact
 // @access    Private
-router.get('/', (req, res) => {
-  res.send(`Add Contact`)
+router.post('/', [auth, [
+  check('name', 'Name is required').not().isEmpty()
+]
+], async (req, res) => {
+  // Check for Errors
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  // Pull out Data form Body
+  const { name, email, phone, type } = req.body;
+
+
+  try {
+    const newContact = new Contact({
+      name,
+      email,
+      phone,
+      type,
+      user: req.user.id
+    });
+
+    const contact = await newContact.save();
+    res.json(contact);
+
+  } catch (err) {
+    console.error(er.message);
+    res.status(500).send('Server Error!')
+  }
+
 });
 
 
