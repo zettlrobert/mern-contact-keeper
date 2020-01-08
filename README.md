@@ -18,6 +18,12 @@ Database on Server
 * nodemon
 * concurrently (run back and frontend at the same time)
 
+### Dev Dependencies Client
+* axios
+* react-router-dom
+* uuid
+* react-transition-group
+
 ## Concurrently
 Run front and Backendserver with one Command
 in root package.json
