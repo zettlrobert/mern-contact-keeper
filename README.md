@@ -18,5 +18,14 @@ Database on Server
 * nodemon
 * concurrently (run back and frontend at the same time)
 
+## Concurrently
+Run front and Backendserver with one Command
+in root package.json
+add dev script
+add proxy to client package.json "proxy": "http://localhost:5000"
+
+
+
 ### Notes
 * default.json is for config package
+
