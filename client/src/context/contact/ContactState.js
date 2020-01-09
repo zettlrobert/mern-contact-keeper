@@ -28,17 +28,16 @@ const ContactState = props => {
         "name": "Adrian Mes",
         "email": "mes@gmail.com",
         "phone": "666-666-666-66666",
-        "type": "personal",
+        "type": "personal"
       },
       {
         "id": 3,
         "name": "Hanna Smith",
         "email": "smith@gmail.com",
         "phone": "111-111-1111",
-        "type": "professional",
+        "type": "professional"
       }
     ],
-
     current: null
   };
 
@@ -73,6 +72,10 @@ const ContactState = props => {
 
 
   // Update Contact
+  const updateContact = contact => {
+    dispatch({ type: UPDATE_CONTACT, payload: contact })
+  }
+
 
   // Filter Contacts
 
@@ -86,7 +89,8 @@ const ContactState = props => {
         addContact,
         deleteContact,
         setCurrent,
-        clearCurrent
+        clearCurrent,
+        updateContact
 
       }}>
       {props.children}
