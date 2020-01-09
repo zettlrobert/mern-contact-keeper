@@ -45,6 +45,12 @@ const ContactState = props => {
   // Actions CRUD
 
   // Add Contact
+  const addContact = contact => {
+    contact.id = uuid.v4(); //randomID 
+
+    dispatch({ type: ADD_CONTACT, payload: contact })
+  }
+
 
   // Delete Contact
 
