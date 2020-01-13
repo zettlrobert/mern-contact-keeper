@@ -83,10 +83,40 @@ const AuthState = props => {
     }
   }
 
+
+
   // Login User
-  const login = () => {
-    console.log('Login User');
+  const login = async (formData) => {
+    // We send Data we need Content Type Header -- axios needs config Object
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    try {
+      // Takes in URL api/users proxy in packagejson
+      const res = await axios.post('/api/auth', formData, config);
+
+      //Api Users is hit.
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      })
+
+      // Get User
+      loadUser();
+
+    } catch (err) {
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: err.response.data.msg
+      })
+
+    }
   }
+
+
 
   // Logout User
   const logout = () => {
