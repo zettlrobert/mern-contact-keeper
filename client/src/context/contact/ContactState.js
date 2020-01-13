@@ -1,4 +1,6 @@
-import React, { useReducer } from 'react';
+import React, {
+  useReducer
+} from 'react';
 import axios from 'axios';
 import ContactContext from './contactContext'
 import contactReducer from './contactReducer'
@@ -76,7 +78,10 @@ const ContactState = props => {
     try {
       await axios.delete(`/api/contacts/${id}`);
 
-      dispatch({ type: DELETE_CONTACT, payload: id })
+      dispatch({
+        type: DELETE_CONTACT,
+        payload: id
+      })
 
 
     } catch (err) {
@@ -85,9 +90,37 @@ const ContactState = props => {
         payload: err.response.msg
       })
     }
+  }
 
+
+  // Update Contact
+  const updateContact = async contact => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    try {
+      const res = await axios.put(`/api/contacts/${contact._id}`, contact, config);
+
+
+      dispatch({
+        type: UPDATE_CONTACT,
+        payload: res.data
+      })
+
+    } catch (err) {
+
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg
+      })
+    }
 
   }
+
+
 
   // Clear Contacts
   const clearContacts = () => {
@@ -99,36 +132,40 @@ const ContactState = props => {
 
   // Set Current Contact
   const setCurrent = contact => {
-    dispatch({ type: SET_CURRENT, payload: contact })
+    dispatch({
+      type: SET_CURRENT,
+      payload: contact
+    })
   }
 
 
   // Clear Current Contact
   const clearCurrent = () => {
-    dispatch({ type: CLEAR_CURRENT })
-  }
-
-
-  // Update Contact
-  const updateContact = contact => {
-    dispatch({ type: UPDATE_CONTACT, payload: contact })
+    dispatch({
+      type: CLEAR_CURRENT
+    })
   }
 
 
   // Filter Contacts
   const filterContacts = text => {
-    dispatch({ type: FILTER_CONTACTS, payload: text })
+    dispatch({
+      type: FILTER_CONTACTS,
+      payload: text
+    })
   }
 
   // Clear Filter
   const clearFilter = () => {
-    dispatch({ type: CLEAR_FILTER })
+    dispatch({
+      type: CLEAR_FILTER
+    })
   }
 
 
-  return (
-    <ContactContext.Provider
-      value={{
+  return (<
+    ContactContext.Provider value={
+      {
         contacts: state.contacts,
         current: state.current,
         filtered: state.filtered,
@@ -142,9 +179,11 @@ const ContactState = props => {
         clearFilter,
         getContacts,
         clearContacts
-      }}>
-      {props.children}
-    </ContactContext.Provider>
+      }
+    } > {
+      props.children
+    } <
+    /ContactContext.Provider>
   )
 }
 
