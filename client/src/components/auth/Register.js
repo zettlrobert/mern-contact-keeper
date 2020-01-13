@@ -4,20 +4,27 @@ import AuthContext from '../../context/auth/authContext';
 
 
 
-const Register = () => {
+const Register = props => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
 
-  const { register, error } = authContext;
+  const { register, error, clearErrors, isAuthenticated } = authContext;
 
   useEffect(() => {
+    if (isAuthenticated) {
+      //Redirect if Authenticated
+      props.history.push('/');
+    }
+
     //Ckeck error text //Create id if Applicaiton gets bigger
     if (error === 'User already exists') {
       setAlert(error, 'danger');
+      clearErrors();
     }
-  }, [error]);
+
+  }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     name: '',
