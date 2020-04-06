@@ -1,5 +1,8 @@
 # mern-contact-keeper
-Fullstack Application MERN
+
+![cover](docs/cover.png)
+
+react and nodejs application to manage contacts
 
 ## Created Project and Cluster on Monbodb.com
 Database on Server
