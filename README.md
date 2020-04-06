@@ -3,6 +3,7 @@
 ![cover](docs/cover.png)
 
 react and nodejs application to manage contacts
+simple ui and basic react skills
 
 ## Created Project and Cluster on Monbodb.com
 Database on Server
