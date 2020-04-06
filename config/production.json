@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb://mern-contact-keeper:27017",
+  "jwtSecret": "secret"
+}
